@@ -8,6 +8,7 @@ import android.database.Cursor;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v13.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -42,9 +43,9 @@ public class ArticleDetailActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().getDecorView().setSystemUiVisibility(
-                    View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN |
-                            View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
+//            getWindow().getDecorView().setSystemUiVisibility(
+//                    View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN |
+//                            View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
         }
         setContentView(R.layout.activity_article_detail);
 
@@ -75,6 +76,7 @@ public class ArticleDetailActivity extends AppCompatActivity
                 updateUpButtonPosition();
             }
         });
+
 
         mUpButtonContainer = findViewById(R.id.up_container);
 
@@ -131,6 +133,11 @@ public class ArticleDetailActivity extends AppCompatActivity
             }
             mStartId = 0;
         }
+
+
+        // Give the TabLayout the ViewPager
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
+        tabLayout.setupWithViewPager(mPager);
     }
 
     @Override
@@ -175,6 +182,11 @@ public class ArticleDetailActivity extends AppCompatActivity
         @Override
         public int getCount() {
             return (mCursor != null) ? mCursor.getCount() : 0;
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return "Tab " + position;
         }
     }
 }

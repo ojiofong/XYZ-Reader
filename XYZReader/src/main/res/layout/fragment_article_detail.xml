@@ -115,7 +115,7 @@
         android:elevation="@dimen/fab_elevation"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        app:backgroundTint="@color/pink_a200"
+        app:backgroundTint="@color/theme_accent"
         app:borderWidth="0dp"
         />
 
