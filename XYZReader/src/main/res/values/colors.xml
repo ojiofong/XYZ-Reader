@@ -23,6 +23,8 @@
     <color name="theme_accent">#FF4081</color>
     <color name="ltgray">#ffe0e0e0</color>
 
+    <color name="window_background">#FFF5F5F5</color>
+
 
     <color name="indigo_500">#3F51B5</color>
     <color name="indigo_700">#303F9F</color>
