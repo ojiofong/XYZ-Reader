@@ -107,16 +107,11 @@ public class ArticleDetailFragment extends Fragment implements
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // mRootView = inflater.inflate(R.layout.fragment_article_detail, container, false);
-        mRootView = inflater.inflate(R.layout.anchor_detail, container, false);
+        mRootView = inflater.inflate(R.layout.anchor_fab_detail, container, false);
 
+        setHasOptionsMenu(true);
 
-        final Toolbar toolbar = (Toolbar) mRootView.findViewById(R.id.toolbar);
-        if (toolbar != null) {
-          //  toolbar.setNavigationIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
-            getActivityCast().setSupportActionBar(toolbar);
-            getActivityCast().getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            toolbar.setTitle("");
-        }
+        setUpToolBar();
 
         collapsingToolbar = (CollapsingToolbarLayout) mRootView.findViewById(R.id.collapsing_toolbar);
 
@@ -134,7 +129,7 @@ public class ArticleDetailFragment extends Fragment implements
             @Override
             public void onScrollChanged() {
                 mScrollY = mScrollView.getScrollY();
-                getActivityCast().onUpButtonFloorChanged(mItemId, ArticleDetailFragment.this);
+//                getActivityCast().onUpButtonFloorChanged(mItemId, ArticleDetailFragment.this);
                 mPhotoContainerView.setTranslationY((int) (mScrollY - mScrollY / PARALLAX_FACTOR));
                 updateStatusBar();
             }
@@ -160,6 +155,20 @@ public class ArticleDetailFragment extends Fragment implements
 
 
         return mRootView;
+    }
+
+    private void setUpToolBar() {
+        final Toolbar toolbar = (Toolbar) mRootView.findViewById(R.id.toolbar);
+        if (toolbar != null) {
+            toolbar.setNavigationIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
+            toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    getActivity().onBackPressed();
+                }
+            });
+            toolbar.setTitle(R.string.app_name);
+        }
     }
 
     private void updateStatusBar() {

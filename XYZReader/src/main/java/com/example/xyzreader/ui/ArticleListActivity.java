@@ -45,7 +45,7 @@ public class ArticleListActivity extends AppCompatActivity implements
 
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
 
-      //  final View toolbarContainerView = findViewById(R.id.toolbar_container);
+        //  final View toolbarContainerView = findViewById(R.id.toolbar_container);
 
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
 
@@ -126,7 +126,13 @@ public class ArticleListActivity extends AppCompatActivity implements
 
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View view = getLayoutInflater().inflate(R.layout.list_item_article, parent, false);
+
+            int columns = getResources().getInteger(R.integer.list_column_count);
+            int mLayout = columns == 1 ? R.layout.list_single_item_article : R.layout.list_item_article;
+
+            View view = getLayoutInflater().inflate(mLayout, parent, false);
+
+
             final ViewHolder vh = new ViewHolder(view);
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -137,9 +143,11 @@ public class ArticleListActivity extends AppCompatActivity implements
                         // Start activity with transition animation
                         Intent intent = new Intent(Intent.ACTION_VIEW,
                                 ItemsContract.Items.buildItemUri(getItemId(vh.getAdapterPosition())));
+
                         @SuppressWarnings("unchecked")
-                        Bundle bundle = ActivityOptions.makeSceneTransitionAnimation(ArticleListActivity.this).toBundle();
-                        startActivity(intent, bundle);
+                        ActivityOptions options = ActivityOptions
+                                .makeSceneTransitionAnimation(ArticleListActivity.this);
+                        startActivity(intent, options.toBundle());
 
                     } else
                         startActivity(new Intent(Intent.ACTION_VIEW,
@@ -164,6 +172,8 @@ public class ArticleListActivity extends AppCompatActivity implements
                     mCursor.getString(ArticleLoader.Query.THUMB_URL),
                     ImageLoaderHelper.getInstance(ArticleListActivity.this).getImageLoader());
             holder.thumbnailView.setAspectRatio(mCursor.getFloat(ArticleLoader.Query.ASPECT_RATIO));
+
+
         }
 
         @Override

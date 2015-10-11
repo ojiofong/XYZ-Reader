@@ -40,28 +40,31 @@ public class ArticleDetailActivity extends AppCompatActivity
 
     private ViewPager mPager;
     private MyPagerAdapter mPagerAdapter;
-    private View mUpButtonContainer;
-    private View mUpButton;
+//    private View mUpButtonContainer;
+//    private View mUpButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+
+  //      new Util(this).setStatusBarColorForKitKat(Color.TRANSPARENT);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 //            getWindow().getDecorView().setSystemUiVisibility(
 //                    View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN |
 //                            View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
-//        }
+//            getWindow().setStatusBarColor(Color.TRANSPARENT);
+        }
 
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 //            Window w = getWindow(); // in Activity's onCreate() for instance
 //            w.setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION, WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
 //            w.setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 //
-////            Window w = getWindow();
-////            w.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-////            w.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-////            w.setStatusBarColor(Color.TRANSPARENT);
-//        }
+//          //  Window w = getWindow();
+//            w.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+//            w.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+//            w.setStatusBarColor(Color.TRANSPARENT);
+        }
 
         setContentView(R.layout.activity_article_detail);
 
@@ -78,9 +81,9 @@ public class ArticleDetailActivity extends AppCompatActivity
             @Override
             public void onPageScrollStateChanged(int state) {
                 super.onPageScrollStateChanged(state);
-                mUpButton.animate()
-                        .alpha((state == ViewPager.SCROLL_STATE_IDLE) ? 1f : 0f)
-                        .setDuration(300);
+//                mUpButton.animate()
+//                        .alpha((state == ViewPager.SCROLL_STATE_IDLE) ? 1f : 0f)
+//                        .setDuration(300);
             }
 
             @Override
@@ -89,34 +92,34 @@ public class ArticleDetailActivity extends AppCompatActivity
                     mCursor.moveToPosition(position);
                 }
                 mSelectedItemId = mCursor.getLong(ArticleLoader.Query._ID);
-                updateUpButtonPosition();
+//                updateUpButtonPosition();
             }
         });
 
 
-        mUpButtonContainer = findViewById(R.id.up_container);
+//        mUpButtonContainer = findViewById(R.id.up_container);
+//
+//        mUpButton = findViewById(R.id.action_up);
+//        mUpButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                onSupportNavigateUp();
+//            }
+//        });
 
-        mUpButton = findViewById(R.id.action_up);
-        mUpButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onSupportNavigateUp();
-            }
-        });
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            mUpButtonContainer.setOnApplyWindowInsetsListener(new View.OnApplyWindowInsetsListener() {
-                @TargetApi(Build.VERSION_CODES.KITKAT_WATCH)
-                @Override
-                public WindowInsets onApplyWindowInsets(View view, WindowInsets windowInsets) {
-                    view.onApplyWindowInsets(windowInsets);
-                    mTopInset = windowInsets.getSystemWindowInsetTop();
-                    mUpButtonContainer.setTranslationY(mTopInset);
-                    updateUpButtonPosition();
-                    return windowInsets;
-                }
-            });
-        }
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//            mUpButtonContainer.setOnApplyWindowInsetsListener(new View.OnApplyWindowInsetsListener() {
+//                @TargetApi(Build.VERSION_CODES.KITKAT_WATCH)
+//                @Override
+//                public WindowInsets onApplyWindowInsets(View view, WindowInsets windowInsets) {
+//                    view.onApplyWindowInsets(windowInsets);
+//                    mTopInset = windowInsets.getSystemWindowInsetTop();
+//                    mUpButtonContainer.setTranslationY(mTopInset);
+//                    updateUpButtonPosition();
+//                    return windowInsets;
+//                }
+//            });
+//        }
 
         if (savedInstanceState == null) {
             if (getIntent() != null && getIntent().getData() != null) {
@@ -164,32 +167,32 @@ public class ArticleDetailActivity extends AppCompatActivity
         mPagerAdapter.notifyDataSetChanged();
     }
 
-    public void onUpButtonFloorChanged(long itemId, ArticleDetailFragment fragment) {
-        if (itemId == mSelectedItemId) {
-            mSelectedItemUpButtonFloor = fragment.getUpButtonFloor();
-            updateUpButtonPosition();
-        }
-    }
+//    public void onUpButtonFloorChanged(long itemId, ArticleDetailFragment fragment) {
+//        if (itemId == mSelectedItemId) {
+//            mSelectedItemUpButtonFloor = fragment.getUpButtonFloor();
+//            updateUpButtonPosition();
+//        }
+//    }
 
-    private void updateUpButtonPosition() {
-        int upButtonNormalBottom = mTopInset + mUpButton.getHeight();
-        mUpButton.setTranslationY(Math.min(mSelectedItemUpButtonFloor - upButtonNormalBottom, 0));
-    }
+//    private void updateUpButtonPosition() {
+//        int upButtonNormalBottom = mTopInset + mUpButton.getHeight();
+//        mUpButton.setTranslationY(Math.min(mSelectedItemUpButtonFloor - upButtonNormalBottom, 0));
+//    }
 
     private class MyPagerAdapter extends FragmentStatePagerAdapter {
         public MyPagerAdapter(FragmentManager fm) {
             super(fm);
         }
 
-        @Override
-        public void setPrimaryItem(ViewGroup container, int position, Object object) {
-            super.setPrimaryItem(container, position, object);
-            ArticleDetailFragment fragment = (ArticleDetailFragment) object;
-            if (fragment != null) {
-                mSelectedItemUpButtonFloor = fragment.getUpButtonFloor();
-                updateUpButtonPosition();
-            }
-        }
+//        @Override
+//        public void setPrimaryItem(ViewGroup container, int position, Object object) {
+//            super.setPrimaryItem(container, position, object);
+//            ArticleDetailFragment fragment = (ArticleDetailFragment) object;
+//            if (fragment != null) {
+//                mSelectedItemUpButtonFloor = fragment.getUpButtonFloor();
+//                updateUpButtonPosition();
+//            }
+//        }
 
         @Override
         public Fragment getItem(int position) {

@@ -8,4 +8,18 @@
     <dimen name="fab_press_translation_z">6dp</dimen>
     <dimen name="fab_margin">24dp</dimen>
 
+    <dimen name="bar_height">56dp</dimen>
+    <dimen name="bar_height_with_image">256dp</dimen>
+    <dimen name="toolbar_image_space">20dp</dimen>
+    <dimen name="keyline_1">16dp</dimen>
+    <dimen name="keyline_2">72dp</dimen>
+    <dimen name="card_margin">4dp</dimen>
+
+
+    <dimen name="elevation_fab_pressed">16dp</dimen>
+    <dimen name="elevation_fab_resting">16dp</dimen>
+    <dimen name="elevation_appbar">4dp</dimen>
+    <dimen name="elevation_maxwidth_layout">2dp</dimen>
+    <dimen name="single_item_card_height">200dp</dimen>
+
 </resources>

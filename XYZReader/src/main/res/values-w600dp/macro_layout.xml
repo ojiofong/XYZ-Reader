@@ -1,0 +1,5 @@
+<resources>
+    <!-- current width over 600dp -->
+
+    <integer name="list_column_count">3</integer>
+</resources>
